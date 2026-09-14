@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101216" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Home Workout" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Home Workout</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">HOME WORKOUT</div>
+        <h1 id="page-title">Dnes</h1>
+      </div>
+      <button id="settings-btn" class="icon-btn" aria-label="Nastavení">⚙︎</button>
+    </header>
+
+    <main id="app">
+      <section id="today-view" class="view active">
+        <div class="hero-card">
+          <div>
+            <div id="phase-pill" class="pill">Týdny 1–2 · 2× týdně</div>
+            <h2 id="workout-title">Workout A</h2>
+            <p id="workout-subtitle">Full body · přibližně 20–30 min</p>
+          </div>
+          <button id="start-workout" class="primary-btn">Start workout</button>
+        </div>
+
+        <div id="active-workout" class="hidden">
+          <div class="session-bar">
+            <div>
+              <div class="eyebrow">AKTIVNÍ TRÉNINK</div>
+              <strong id="session-name">Workout A</strong>
+            </div>
+            <div id="session-time">00:00</div>
+          </div>
+
+          <div id="exercise-list"></div>
+
+          <button id="finish-workout" class="primary-btn wide">Dokončit workout ✓</button>
+          <button id="cancel-workout" class="ghost-btn wide">Zrušit workout</button>
+        </div>
+
+        <div id="next-card" class="info-card">
+          <div class="section-title">Jak to funguje</div>
+          <p>U každé série zapíšeš opakování. Po poslední sérii zvolíš RIR — kolik čistých opakování bys ještě zvládl.</p>
+          <div class="rir-legend">
+            <span><b>0</b> selhání</span>
+            <span><b>1</b> ještě 1</span>
+            <span><b>2</b> ideál</span>
+            <span><b>3+</b> lehké</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="progress-view" class="view">
+        <div class="section-title">Tělesná váha</div>
+        <div class="weight-card">
+          <div class="weight-entry">
+            <input id="weight-input" type="number" min="40" max="200" step="0.1" placeholder="např. 68.4" inputmode="decimal" />
+            <span>kg</span>
+            <button id="save-weight" class="secondary-btn">Uložit</button>
+          </div>
+          <div id="weight-summary" class="muted">Zatím bez záznamu.</div>
+          <div id="weight-chart" class="chart"></div>
+        </div>
+
+        <div class="section-title top-gap">Historie workoutů</div>
+        <div id="history-list" class="history-list"></div>
+      </section>
+
+      <section id="plan-view" class="view">
+        <div class="plan-card">
+          <div class="pill">PROGRAM v1.0</div>
+          <h2>6 týdnů</h2>
+          <p><b>Týdny 1–2:</b> 2× týdně<br><b>Týdny 3–6:</b> 3× týdně</p>
+          <p class="muted">Střídej A → B → A → B. Většinu pracovních sérií konči kolem 1–2 RIR.</p>
+        </div>
+
+        <div id="plan-list"></div>
+
+        <div class="info-card">
+          <div class="section-title">Progrese</div>
+          <p>Když dáš horní hranici opakování v obou sériích a pořád máš zhruba 2 RIR, appka ti doporučí těžší variantu.</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabbar">
+      <button class="tab active" data-view="today-view">Dnes</button>
+      <button class="tab" data-view="progress-view">Progress</button>
+      <button class="tab" data-view="plan-view">Plán</button>
+    </nav>
+  </div>
+
+  <div id="timer-sheet" class="sheet hidden" aria-hidden="true">
+    <div class="sheet-card">
+      <div class="eyebrow">REST TIMER</div>
+      <div id="timer-value" class="timer-value">01:15</div>
+      <div class="timer-actions">
+        <button class="chip" data-add="-15">−15 s</button>
+        <button id="timer-toggle" class="primary-btn">Pauza</button>
+        <button class="chip" data-add="15">+15 s</button>
+      </div>
+      <button id="timer-close" class="ghost-btn wide">Zavřít</button>
+    </div>
+  </div>
+
+  <div id="settings-sheet" class="sheet hidden" aria-hidden="true">
+    <div class="sheet-card">
+      <div class="section-title">Nastavení</div>
+      <label class="field-label">Program začal</label>
+      <input id="start-date" type="date" class="full-input" />
+      <label class="field-label">Výchozí pauza</label>
+      <select id="rest-seconds" class="full-input">
+        <option value="60">60 sekund</option>
+        <option value="75">75 sekund</option>
+        <option value="90">90 sekund</option>
+      </select>
+      <button id="save-settings" class="primary-btn wide">Uložit</button>
+      <button id="settings-close" class="ghost-btn wide">Zavřít</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
